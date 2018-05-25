@@ -20,6 +20,14 @@ class CryptocurrencyData:
             self.file.flush()
         self.file.write('\n')
 
+    def _countdown(self, t):
+        while t:
+            mins, secs = divmod(t, 60)
+            timeformat = '{:02d}:{:02d}'.format(mins, secs)
+            print(timeformat, end='\r')
+            time.sleep(1)
+            t -= 1
+
 
     def execute(self):
         while(True):
@@ -28,8 +36,8 @@ class CryptocurrencyData:
             self._write_data()
             print('Data has been successfully collected.')
             print('Data file up-to-date.')
-            print('Next fetching process will be in 5 minutes...')
-            time.sleep(self.delay)
+            print('Next fetching process will be in: ')
+            self._countdown(self.delay)
 
     def stop(self):
         self.file.close()
