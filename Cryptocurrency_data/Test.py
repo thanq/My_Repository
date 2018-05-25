@@ -23,7 +23,12 @@ class CryptocurrencyData:
 
     def execute(self):
         while(True):
+            print('Process activated...')
+            print('Collecting data...')
             self._write_data()
+            print('Data has been successfully collected.')
+            print('Data file up-to-date.')
+            print('Next fetching process will be in 5 minutes...')
             time.sleep(self.delay)
 
     def stop(self):
@@ -52,7 +57,7 @@ if __name__ == "__main__":
 
 
     client = OkexClient(None, None)
-    data_file = open('okex_data.txt','w')
+    data_file = open('okex_data.txt','a')
     delay = 300
 
     cb = CryptocurrencyData(client,symbol_list, data_file, delay)
